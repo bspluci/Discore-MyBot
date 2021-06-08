@@ -5,14 +5,14 @@ const api = new battlegrounds(pubgKey, "pc-krjp");
 
 module.exports = {
    name: "pubg-total",
-   description: "이미지 검색",
+   description: "전적 검색",
    aliases: ["전적", "total", "pt", "history", "his"],
    args: true,
    usage: "검색어",
    cooldown: 0,
    execute(message, args) {
       let discordName = "";
-      const gameName = args[0].toLowerCase();
+      const gamer = args[0].toLowerCase();
 
       if (message.guild.members.cache.get(message.author.id).nickname) {
          discordName = message.guild.members.cache.get(message.author.id).nickname.toLowerCase();
@@ -20,10 +20,10 @@ module.exports = {
          discordName = message.guild.members.cache.get(message.author.id).user.username.toLowerCase();
       }
 
-      // if (!discordName.indexOf(gameName) == 0) {
-      //    message.channel.send("다른 사람의 전적은 검색할 수 없습니다.");
-      //    return;
-      // }
+      if (!discordName.indexOf(gamer) == 0) {
+         message.channel.send("다른 사람의 전적은 검색할 수 없습니다.");
+         return;
+      }
 
       let data = undefined;
       let data20 = [];
@@ -35,7 +35,7 @@ module.exports = {
       const getMatch = async () => {
          try {
             const res = await api.getPlayers({ names: [args[0]] });
-            console.log(res[0].raw.relationships);
+
             if (!res[0].matches.length) {
                message.channel.send(`${message.author} 최근 15일간 전적이 없습니다.`);
                return;

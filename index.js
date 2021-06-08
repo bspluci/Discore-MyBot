@@ -1,6 +1,6 @@
 const fs = require("fs");
 const Discord = require("discord.js");
-const { prefix } = require("./config.json");
+const { token, prefix } = require("./config.json");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -18,7 +18,7 @@ for (const folder of commandFolders) {
 }
 
 client.once("ready", () => {
-   console.log("Ready!asdfasdf");
+   console.log("Ready!");
 });
 
 client.on("message", (message) => {
@@ -99,4 +99,5 @@ client.on("message", (message) => {
    }
 });
 
+// client.login(token);
 client.login(process.env.TOKEN);
