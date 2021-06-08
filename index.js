@@ -18,7 +18,7 @@ for (const folder of commandFolders) {
 }
 
 client.once("ready", () => {
-   console.log("Ready!");
+   console.log("Ready!asdfasdf");
 });
 
 client.on("message", (message) => {
